@@ -31,7 +31,7 @@ from rl.memory import SequentialMemory # To maintain memory
 import numpy as np
 
 #Custom imports:
-import python_ai_training.create_environments as create_environments
+import create_environments
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' # fixing the "Could not load dynamic library 'cudnn64_8.dll'; dlerror: cudnn64_8.dll not found" error, but also disables the option to run from the GPU
 
@@ -41,6 +41,7 @@ LINE_FROM_ENVIRONMENT_FILE = 1
 
 # User specific configuration
 TESTING = True # should the neural network be tested after it is finished with training?
+SHOW_NET_STRUCT = True # prints out the net structure on initialization of the learning process
 SAVE_WEIGHTS = True # should the weights be saved after the training is finished?
 SAVE_WEIGHTS_AS = "dqn_weights.h5f" # if the weights are saved, this is the filename 
 

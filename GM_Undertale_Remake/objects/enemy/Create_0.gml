@@ -1,0 +1,1 @@
+move_towards_point(room_width/2, sprite_height/2, 5);

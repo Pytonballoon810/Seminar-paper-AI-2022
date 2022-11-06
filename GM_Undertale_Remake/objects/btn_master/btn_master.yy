@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "sans",
-    "path": "sprites/sans/sans.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "managed": true,
@@ -31,7 +28,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "enemy",
+  "name": "btn_master",
   "tags": [],
   "resourceType": "GMObject",
 }

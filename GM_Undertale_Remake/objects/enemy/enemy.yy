@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "Act",
-    "path": "sprites/Act/Act.yy",
+    "name": "sans",
+    "path": "sprites/sans/sans.yy",
   },
   "solid": false,
   "visible": true,
@@ -20,11 +20,14 @@
   "physicsFriction": 0.2,
   "physicsStartAwake": true,
   "physicsKinematic": false,
-  "physicsShapePoints": [],
+  "physicsShapePoints": [
+    {"x":0.0,"y":0.0,},
+    {"x":136.0,"y":0.0,},
+    {"x":136.0,"y":179.0,},
+    {"x":0.0,"y":179.0,},
+  ],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":10,"eventType":6,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":11,"eventType":6,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -33,7 +36,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_button_act",
+  "name": "enemy",
   "tags": [],
   "resourceType": "GMObject",
 }

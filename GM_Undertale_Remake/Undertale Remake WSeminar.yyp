@@ -15,6 +15,7 @@
     {"id":{"name":"Act","path":"sprites/Act/Act.yy",},"order":21,},
     {"id":{"name":"text_box","path":"objects/text_box/text_box.yy",},"order":5,},
     {"id":{"name":"obj_button_act","path":"objects/obj_button_act/obj_button_act.yy",},"order":4,},
+    {"id":{"name":"btn_master","path":"objects/btn_master/btn_master.yy",},"order":12,},
     {"id":{"name":"master_enc01","path":"objects/master_enc01/master_enc01.yy",},"order":11,},
     {"id":{"name":"playframe_left","path":"objects/playframe_left/playframe_left.yy",},"order":0,},
     {"id":{"name":"enc01","path":"rooms/enc01/enc01.yy",},"order":1,},
