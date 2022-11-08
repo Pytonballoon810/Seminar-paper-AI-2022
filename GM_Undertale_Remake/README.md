@@ -25,4 +25,3 @@ The "untrained AI state" is coded in synonymously to how the AI stated out in ac
 | movement_speed       | the amount of pixels the player moves per tick                            | player       | int  | 5       |
 | start_x              | start x coordinate of the player                                          | player       | int  | 960     |
 | start_y              | start y coordinate of the player                                          | player       | int  | 540     |
-|                      |                                                                           |              |      |         |
