@@ -1,8 +1,8 @@
 # Seminar paper AI 2022
 
 <p style='text-align: justify;'>This is the practical half of my seminar paper written in 2022 as part of my whole scientific work:  
-**"Artificial intelligence in computer games - AI learns to play a 2-dimensional game through reinforcement learning"**
-All the code i used can be found in the folders above.  
+<b>"Artificial intelligence in computer games - AI learns to play a 2-dimensional game through reinforcement learning"
+All the code i used can be found in the folders above.</b>  
 
 All rights for usage of images and animations have been obtained. All artists are credited in the collective texture files.  
 A few graphics were created by hand, free for use for anybody.

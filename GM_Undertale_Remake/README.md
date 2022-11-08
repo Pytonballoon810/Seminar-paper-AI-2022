@@ -28,7 +28,7 @@ The "untrained AI state" is coded in synonymously to how the AI stated out in ac
 
 ## Images
 
-![game01](game00.png)  
+![game00](game00.png)  
 ![game01](game01.png)  
-![game01](game02.png)  
-![game01](game03.png)  
+![game02](game02.png)  
+![game03](game03.png)  
