@@ -1,1 +1,1 @@
-player.phy_speed_y = movement_speed
+y += movement_speed

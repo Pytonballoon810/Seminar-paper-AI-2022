@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "mapping",
+    "path": "sprites/mapping/mapping.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,

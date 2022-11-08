@@ -110,11 +110,11 @@ class Environment(Env):
         Args:
             player_pos (tuple[int, int]): the player position for which the environment is set up
         """
-        playfield_zeros = [[0], [0]]
-        playfield_max = [[410], [410]]
-        self.action_space = Discrete(5) # actions we can take (Move.moves)
+        # Inherit from Env
+        super().__init__()
         # self.observation_space = Box(low=np.array(playfield_zeros, dtype=np.float32), high=np.array(playfield_max, dtype=np.float32), dtype=np.float32) # action array
-        self.observation_space = Box(low=0, high=410, shape=(5, 410, 410), dtype=np.float32)
+        self.observation_space = Box(low=0, high=1, shape=(410, 410), dtype=np.uint8)
+        self.action_space = Discrete(5) # actions we can take (Move.moves)
         # LEGACY: using indexed state variable
         # self.state = random.choice([Move.shockwave, Move.b_l, Move.b_r, Move.t_l, Move.t_r]) # set start action
         self.state = random.randint(0, 4)
@@ -133,15 +133,19 @@ class Environment(Env):
         """
         # LEGACY: using indexed state variable
         # self.state = Move.moves[action]
-        self.state = action
+        self.state = [[0 for x in range(410)] for y in range(410)]
+        self.state[self.player_position[0]][self.player_position[1]] = 1
         self.player_position_move -= 1
         # print(self.state, self.player_position) # DEBUGGING
-        if calculate_aoe_hit(self.state, self.player_position):
+        # Add player move noise
+        self.player_position = self.player_position[0]+random.randint(-self.player_position_move, self.player_position_move), self.player_position[1]+random.randint(-self.player_position_move, self.player_position_move)
+        print(action)
+        if calculate_aoe_hit(action, self.player_position):
+            self.state = [[0 for x in range(410)] for y in range(410)]
+            self.state[self.player_position[0]][self.player_position[1]] = 1
             reward = 1
         else:
             reward = -1
-        # Add player move noise
-        self.player_position = self.player_position[0]+random.randint(-self.player_position_move, self.player_position_move), self.player_position[1]+random.randint(-self.player_position_move, self.player_position_move)
         if self.player_position_move <= 0:
             done = True
         else: 
@@ -197,6 +201,7 @@ class Agent():
         self.training_data = pandas.read_csv(TRAINING_DATA_FILE)
         
         self.env = Environment((254, 82))
+        # print(self.env.step(4)) # DEBUGGING
             
             
     def build_model(self) -> Sequential: # actions:int
@@ -213,13 +218,14 @@ class Agent():
         # print(states, actions) # DEBUGGING
         model = Sequential()
         # LEGACY: no need to flatten out the custom env with an input_shape before usage # TODO
-        # model.add(Flatten(input_shape=(1, states)))
+        # model.add(Flatten(input_shape=states))
         model.add(Dense(8, activation="relu", input_shape=states)) # Dense node layer as standard keras neuron to generate deep reinforcement learning algorithms
         model.add(Dense(8, activation="relu"))
         model.add(Dense(8, activation="relu"))
         model.add(Dense(8, activation="relu"))
         model.add(Dense(8, activation="relu"))
         model.add(Dense(actions, activation="softmax"))
+        model.summary()
         return model
 
     def build_agent(self, model:Sequential) -> DQNAgent:
@@ -234,6 +240,7 @@ class Agent():
         actions = self.env.action_space.n # = 5
         policy = BoltzmannGumbelQPolicy()
         memory = SequentialMemory(limit=50_000, window_length=1)
+        print(model.output_shape)
         dqn = DQNAgent(model=model, memory=memory, policy=policy, nb_actions=actions, nb_steps_warmup=20_000, target_model_update=1e-2)
         return dqn
             
@@ -245,10 +252,11 @@ if __name__ == "__main__":
     # env = agent.create_environment("(254, 82)","shockwave")
     my_model = my_agent.build_model()
     # my_model.summary()
+    print("here")
     my_dqn = my_agent.build_agent(my_model)
     
     my_dqn.compile(Adam(learning_rate=0.01), metrics=["mae"]) # mae = mean absolute error
-    my_dqn.fit(my_agent.env, nb_steps=50_000, visualize=False, verbose=1)
+    my_dqn.fit(my_agent.env, nb_steps=50_000)
     if TESTING:
         scores = my_dqn.test(my_agent.env, nb_episodes=100, visualize=False) #nb_episodes = amount of testing episodes to run
         print(np.mean(scores.history["episode_reward"]))

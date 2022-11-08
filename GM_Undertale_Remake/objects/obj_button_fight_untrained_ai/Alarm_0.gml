@@ -1,0 +1,1 @@
+with(enemy){event_user(1);}

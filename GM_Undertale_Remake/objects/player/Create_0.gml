@@ -1,1 +1,2 @@
-phy_fixed_rotation = true
+collided = false;
+timestamp = 0
