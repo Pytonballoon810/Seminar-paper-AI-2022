@@ -16,7 +16,7 @@ import os
 # as well as the flatten node to flatten out the 2-dimensional inputs and 
 # dense nodes as the default tensorflow deep leaning node
 from keras.models import Sequential
-from keras.layers import Dense, Flatten # Flatten import unused for personal environment
+from keras.layers import Dense, Flatten, Input # Flatten import unused for personal environment
 from keras.optimizers import Adam
 
 import pandas # for reading csv files
@@ -114,7 +114,7 @@ class Environment(Env):
         super().__init__()
         # self.observation_space = Box(low=np.array(playfield_zeros, dtype=np.float32), high=np.array(playfield_max, dtype=np.float32), dtype=np.float32) # action array
         self.observation_space = Box(low=0, high=1, shape=(410, 410), dtype=np.uint8)
-        self.action_space = Discrete(5) # actions we can take (Move.moves)
+        self.action_space = Discrete(5, start=0) # actions we can take (Move.moves)
         # LEGACY: using indexed state variable
         # self.state = random.choice([Move.shockwave, Move.b_l, Move.b_r, Move.t_l, Move.t_r]) # set start action
         self.state = random.randint(0, 4)
@@ -123,7 +123,7 @@ class Environment(Env):
         
     def step(self, action:int) -> tuple[int, int, bool, dict]:
         """overwriting the step function from the gym.Env class
-        # would be possible to user super().__ini__() for perfect implementation, but is simply not required here
+        # would be possible to user super().__init__() for perfect implementation, but is simply not required here
 
         Args:
             action (int): action index for the self.state variable
@@ -139,7 +139,6 @@ class Environment(Env):
         # print(self.state, self.player_position) # DEBUGGING
         # Add player move noise
         self.player_position = self.player_position[0]+random.randint(-self.player_position_move, self.player_position_move), self.player_position[1]+random.randint(-self.player_position_move, self.player_position_move)
-        print(action)
         if calculate_aoe_hit(action, self.player_position):
             self.state = [[0 for x in range(410)] for y in range(410)]
             self.state[self.player_position[0]][self.player_position[1]] = 1
@@ -219,13 +218,16 @@ class Agent():
         model = Sequential()
         # LEGACY: no need to flatten out the custom env with an input_shape before usage # TODO
         # model.add(Flatten(input_shape=states))
-        model.add(Dense(8, activation="relu", input_shape=states)) # Dense node layer as standard keras neuron to generate deep reinforcement learning algorithms
+        model.add(Input(shape=(410, 410, 5)))
+        model.add(Dense(256, activation="relu")) # Dense node layer as standard keras neuron to generate deep reinforcement learning algorithms
+        model.add(Dense(128, activation="relu"))
+        model.add(Dense(64, activation="relu"))
+        model.add(Dense(32, activation="relu"))
         model.add(Dense(8, activation="relu"))
-        model.add(Dense(8, activation="relu"))
-        model.add(Dense(8, activation="relu"))
-        model.add(Dense(8, activation="relu"))
+        model.add(Flatten())
         model.add(Dense(actions, activation="softmax"))
         model.summary()
+        print(model.input_shape)
         return model
 
     def build_agent(self, model:Sequential) -> DQNAgent:
