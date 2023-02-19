@@ -1,5 +1,7 @@
 """learner module of "AI training python"
 
+The simulation engine to run the loaded environment.
+
 Returns:
     None
 Exports:
