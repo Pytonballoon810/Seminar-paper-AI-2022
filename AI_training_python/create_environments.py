@@ -1,5 +1,8 @@
 """create_environments module of "AI training python"
 
+Used to generate the training_data.csv file which is used for
+simulating different environments (ENVs)
+
 Returns:
     None
 """

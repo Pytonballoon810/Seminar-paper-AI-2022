@@ -45,3 +45,7 @@ Another really big factor for performance is the number of nodes used in the net
 In this particular example the AI is built on six dense nodes (layers), with eight neurons per layer in- or decreasing these numbers could also take a large impact in system performance.  
 The restrictions of the ANN itself aside there are restriction put on the enemy or player by the way the game is designed.  The enemy only being able to use a maximum of five legal attacks at any stage in the game reduces the ceiling load of the AI massively.  
 This restriction could be reworked as it is purely a game design choice.
+
+## File dependencies
+
+Both file tress, "AI_training_python" as well as "GM_Undertale_Remake", both work completely independent from each other. A future project might be an interface for the python code to be used in the GM library.

@@ -11,13 +11,15 @@ One of the biggest bottlenecks of the AI environment is the fact that i cant see
 
 The structure of a network with 6 dense layers looks like this:  
 
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:lightgreen">8</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"relu"</span>, <span style="color:#40E0D0">input_shape</span>=<span style="color:#40E0D0">states</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span> <span style="color:#27AE60"># Dense node layer as standard keras neuron to generate deep reinforcement learning algorithms</span>  
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:lightgreen">8</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"relu"</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span>  
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:lightgreen">8</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"relu"</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span>  
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:lightgreen">8</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"relu"</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span>  
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:lightgreen">8</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"relu"</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span>  
-<span style="color:#40E0D0">model</span>.<span style="color:#F4D03F">add</span><span style="color:#DE3163">(</span><span style="color:#17A589">Dense</span><span style="color:yellow">(</span><span style="color:#40E0D0">actions</span>, <span style="color:#40E0D0">activation</span>=<span style="color:#CB4335">"softmax"</span><span style="color:yellow">)</span><span style="color:#DE3163">)</span>  
-  
+```py
+model.add(Dense(8, activation="relu", input_shape=states)) # Dense node layer as standard keras neuron to generate deep reinforcement learning algorithms
+model.add(Dense(8, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(actions, activation="softmax"))
+```  
+
 <pre>Model: "sequential"  
 _________________________________________________________________  
  Layer (type)                Output Shape              Param #  
